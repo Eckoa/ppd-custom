@@ -5,7 +5,7 @@
      return "balanced";
    case PPD_PROFILE_PERFORMANCE:
 -    return "performance";
-+    return "balanced_performance";
++    return "balanced-performance";
    }
  
    g_debug ("Unhandled ACPI platform profile '%d'", profile);
@@ -20,7 +20,7 @@
      return PPD_PROFILE_BALANCED;
  
 -  if (g_str_equal (str, "performance"))
-+  if (g_str_equal (str, "balanced_performance"))
++  if (g_str_equal (str, "balanced-performance"))
      return PPD_PROFILE_PERFORMANCE;
  
    g_debug ("Unhandled ACPI platform profile '%s'", str);
@@ -29,7 +29,7 @@
  
    if (g_strv_contains (choices, "balanced") &&
 -      g_strv_contains (choices, "performance")) {
-+      g_strv_contains (choices, "balanced_performance")) {
++      g_strv_contains (choices, "balanced-performance")) {
      if (g_strv_contains (choices, "low-power") ||
          g_strv_contains (choices, "quiet"))
        self->has_low_power = TRUE;
