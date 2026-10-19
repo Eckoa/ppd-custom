@@ -1,0 +1,35 @@
+--- a/power-profiles-daemon/src/ppd-driver-platform-profile.c	2025-02-18 18:07:24.000000000 -0600
++++ b/power-profiles-daemon/src/ppd-driver-platform-profile.c	2026-10-18 19:51:32.616533938 -0500
+@@ -68,7 +68,7 @@
+   case PPD_PROFILE_BALANCED:
+     return "balanced";
+   case PPD_PROFILE_PERFORMANCE:
+-    return "performance";
++    return "balanced_performance";
+   }
+ 
+   g_debug ("Unhandled ACPI platform profile '%d'", profile);
+@@ -88,12 +88,10 @@
+       g_str_equal (str, "quiet"))
+     return PPD_PROFILE_POWER_SAVER;
+ 
+-  if (g_str_equal (str, "balanced") ||
+-      g_str_equal (str, "balanced_performance") ||
+-      g_str_equal (str, "cool"))
++  if (g_str_equal (str, "balanced"))
+     return PPD_PROFILE_BALANCED;
+ 
+-  if (g_str_equal (str, "performance"))
++  if (g_str_equal (str, "balanced_performance"))
+     return PPD_PROFILE_PERFORMANCE;
+ 
+   g_debug ("Unhandled ACPI platform profile '%s'", str);
+@@ -150,7 +148,7 @@
+   const char * const *choices = (const char * const*) self->profile_choices;
+ 
+   if (g_strv_contains (choices, "balanced") &&
+-      g_strv_contains (choices, "performance")) {
++      g_strv_contains (choices, "balanced_performance")) {
+     if (g_strv_contains (choices, "low-power") ||
+         g_strv_contains (choices, "quiet"))
+       self->has_low_power = TRUE;

@@ -1,0 +1,31 @@
+--- a/power-profiles-daemon/src/ppd-driver-intel-pstate.c	2025-02-18 18:07:24.000000000 -0600
++++ b/power-profiles-daemon/src/ppd-driver-intel-pstate.c	2026-10-18 19:47:44.091100857 -0500
+@@ -297,11 +297,11 @@
+    * as all the values are always available */
+   switch (profile) {
+   case PPD_PROFILE_POWER_SAVER:
+-    return "power";
++    return "balance_power";
+   case PPD_PROFILE_BALANCED:
+     return battery ? "balance_power" : "balance_performance";
+   case PPD_PROFILE_PERFORMANCE:
+-    return "performance";
++    return battery ? "balance_performance" : "performance";
+   }
+ 
+   g_return_val_if_reached (NULL);
+@@ -314,11 +314,11 @@
+    * See ENERGY_PERF_BIAS_* */
+   switch (profile) {
+   case PPD_PROFILE_POWER_SAVER:
+-    return "15";
++    return "8";
+   case PPD_PROFILE_BALANCED:
+-    return battery ? "8" : "6";
++    return battery ? "6" : "4";
+   case PPD_PROFILE_PERFORMANCE:
+-    return "0";
++    return battery ? "4" : "0";
+   }
+ 
+   g_return_val_if_reached (NULL);
